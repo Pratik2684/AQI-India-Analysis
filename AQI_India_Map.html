@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_22b7b772f4b37d48672f4b99509f2550 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+<div style="position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
+     background-color: #1F4E79; color: white; padding: 10px 20px;
+     border-radius: 8px; font-size: 16px; font-weight: bold;
+     z-index: 1000; box-shadow: 2px 2px 6px rgba(0,0,0,0.3);">
+     AQI Map of India (2015-2020 Average)
+</div>
+    
+<div style="position: fixed; bottom: 30px; left: 20px; background: white;
+     padding: 12px 16px; border-radius: 8px; font-size: 13px;
+     box-shadow: 2px 2px 8px rgba(0,0,0,0.2); z-index: 1000;">
+  <b style="font-size:14px">AQI Categories</b><br>
+  <span style="color:#00e400">&#9679;</span> Good (0-50)<br>
+  <span style="color:#cccc00">&#9679;</span> Satisfactory (51-100)<br>
+  <span style="color:#ff7e00">&#9679;</span> Moderate (101-150)<br>
+  <span style="color:#ff0000">&#9679;</span> Poor (151-200)<br>
+  <span style="color:#8f3f97">&#9679;</span> Very Poor (201-300)<br>
+  <span style="color:#7e0023">&#9679;</span> Severe (300+)
+</div>
+    
+            <div class="folium-map" id="map_22b7b772f4b37d48672f4b99509f2550" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_22b7b772f4b37d48672f4b99509f2550 = L.map(
+                "map_22b7b772f4b37d48672f4b99509f2550",
+                {
+                    center: [20.5937, 78.9629],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 5,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_e8eda670ac7211239e8cbd7a13b2f9d2 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_e8eda670ac7211239e8cbd7a13b2f9d2.addTo(map_22b7b772f4b37d48672f4b99509f2550);
+        
+    
+            var circle_marker_9065d75164c7e60103aeffb813396a43 = L.circleMarker(
+                [28.6139, 77.209],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8f3f97", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.666666666666666, "stroke": true, "weight": 1.5}
+            ).addTo(map_22b7b772f4b37d48672f4b99509f2550);
+        
+    
+        var popup_a45ca6cdfe856993e1f3ea525fea2ebc = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_5047304248fdcc9cdc008dc497b67f37 = $(`<div id="html_5047304248fdcc9cdc008dc497b67f37" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; min-width:140px'>                 <b style='font-size:14px'>Delhi</b><br>                 <span style='color:#666'>Avg AQI:</span> <b style='color:#8f3f97'>220</b><br>                 <span style='color:#666'>Category:</span> <b>Very Poor</b>             </div></div>`)[0];
+                popup_a45ca6cdfe856993e1f3ea525fea2ebc.setContent(html_5047304248fdcc9cdc008dc497b67f37);
+            
+        
+
+        circle_marker_9065d75164c7e60103aeffb813396a43.bindPopup(popup_a45ca6cdfe856993e1f3ea525fea2ebc)
+        ;
+
+        
+    
+    
+            circle_marker_9065d75164c7e60103aeffb813396a43.bindTooltip(
+                `<div>
+                     Delhi: AQI 220 (Very Poor)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a6427b19e83c2d3387477d0216965e31 = L.circleMarker(
+                [28.4595, 77.0266],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff0000", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_22b7b772f4b37d48672f4b99509f2550);
+        
+    
+        var popup_de77cb8ddde58b76d0510ff85888f9a9 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_27e71d3aec28fc0cf77d1440c78e42fc = $(`<div id="html_27e71d3aec28fc0cf77d1440c78e42fc" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; min-width:140px'>                 <b style='font-size:14px'>Gurugram</b><br>                 <span style='color:#666'>Avg AQI:</span> <b style='color:#ff0000'>195</b><br>                 <span style='color:#666'>Category:</span> <b>Poor</b>             </div></div>`)[0];
+                popup_de77cb8ddde58b76d0510ff85888f9a9.setContent(html_27e71d3aec28fc0cf77d1440c78e42fc);
+            
+        
+
+        circle_marker_a6427b19e83c2d3387477d0216965e31.bindPopup(popup_de77cb8ddde58b76d0510ff85888f9a9)
+        ;
+
+        
+    
+    
+            circle_marker_a6427b19e83c2d3387477d0216965e31.bindTooltip(
+                `<div>
+                     Gurugram: AQI 195 (Poor)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cd2c4c5a8f4fc535c466602cc865b53d = L.circleMarker(
+                [26.8467, 80.9462],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff0000", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.866666666666667, "stroke": true, "weight": 1.5}
+            ).addTo(map_22b7b772f4b37d48672f4b99509f2550);
+        
+    
+        var popup_b7307ec0c73e63d7d420a82fe4752034 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_2011ae7d6c9e26e87400350d8cfc603b = $(`<div id="html_2011ae7d6c9e26e87400350d8cfc603b" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; min-width:140px'>                 <b style='font-size:14px'>Lucknow</b><br>                 <span style='color:#666'>Avg AQI:</span> <b style='color:#ff0000'>178</b><br>                 <span style='color:#666'>Category:</span> <b>Poor</b>             </div></div>`)[0];
+                popup_b7307ec0c73e63d7d420a82fe4752034.setContent(html_2011ae7d6c9e26e87400350d8cfc603b);
+            
+        
+
+        circle_marker_cd2c4c5a8f4fc535c466602cc865b53d.bindPopup(popup_b7307ec0c73e63d7d420a82fe4752034)
+        ;
+
+        
+    
+    
+            circle_marker_cd2c4c5a8f4fc535c466602cc865b53d.bindTooltip(
+                `<div>
+                     Lucknow: AQI 178 (Poor)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a123e43b8bd3c7c8f7dc34110f1758e9 = L.circleMarker(
+                [25.5941, 85.1376],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff0000", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.666666666666666, "stroke": true, "weight": 1.5}
+            ).addTo(map_22b7b772f4b37d48672f4b99509f2550);
+        
+    
+        var popup_68236cfeafa5159b60f5a0f954f1709f = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_b75cdc8045b4ab11c0d939a16ba31b3e = $(`<div id="html_b75cdc8045b4ab11c0d939a16ba31b3e" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; min-width:140px'>                 <b style='font-size:14px'>Patna</b><br>                 <span style='color:#666'>Avg AQI:</span> <b style='color:#ff0000'>175</b><br>                 <span style='color:#666'>Category:</span> <b>Poor</b>             </div></div>`)[0];
+                popup_68236cfeafa5159b60f5a0f954f1709f.setContent(html_b75cdc8045b4ab11c0d939a16ba31b3e);
+            
+        
+
+        circle_marker_a123e43b8bd3c7c8f7dc34110f1758e9.bindPopup(popup_68236cfeafa5159b60f5a0f954f1709f)
+        ;
+
+        
+    
+    
+            circle_marker_a123e43b8bd3c7c8f7dc34110f1758e9.bindTooltip(
+                `<div>
+                     Patna: AQI 175 (Poor)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2706b1c41d7b20dfe6cfa835e53521bb = L.circleMarker(
+                [20.95, 85.2333],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff0000", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.666666666666666, "stroke": true, "weight": 1.5}
+            ).addTo(map_22b7b772f4b37d48672f4b99509f2550);
+        
+    
+        var popup_0814770b43f3a5f9044d34c9506206cd = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_0777736fd770b753107d8c543bd33f16 = $(`<div id="html_0777736fd770b753107d8c543bd33f16" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; min-width:140px'>                 <b style='font-size:14px'>Talcher</b><br>                 <span style='color:#666'>Avg AQI:</span> <b style='color:#ff0000'>175</b><br>                 <span style='color:#666'>Category:</span> <b>Poor</b>             </div></div>`)[0];
+                popup_0814770b43f3a5f9044d34c9506206cd.setContent(html_0777736fd770b753107d8c543bd33f16);
+            
+        
+
+        circle_marker_2706b1c41d7b20dfe6cfa835e53521bb.bindPopup(popup_0814770b43f3a5f9044d34c9506206cd)
+        ;
+
+        
+    
+    
+            circle_marker_2706b1c41d7b20dfe6cfa835e53521bb.bindTooltip(
+                `<div>
+                     Talcher: AQI 175 (Poor)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_840b43c2850960c91da8c9e5bfd7ff1e = L.circleMarker(
+                [23.69, 86.42],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff0000", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13.2, "stroke": true, "weight": 1.5}
+            ).addTo(map_22b7b772f4b37d48672f4b99509f2550);
+        
+    
+        var popup_3a78b7239d50bee75f1c65ead051e4d9 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_a02d1bfb55f04f22b2f1dacc010c9f6a = $(`<div id="html_a02d1bfb55f04f22b2f1dacc010c9f6a" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; min-width:140px'>                 <b style='font-size:14px'>Jorapokhar</b><br>                 <span style='color:#666'>Avg AQI:</span> <b style='color:#ff0000'>198</b><br>                 <span style='color:#666'>Category:</span> <b>Poor</b>             </div></div>`)[0];
+                popup_3a78b7239d50bee75f1c65ead051e4d9.setContent(html_a02d1bfb55f04f22b2f1dacc010c9f6a);
+            
+        
+
+        circle_marker_840b43c2850960c91da8c9e5bfd7ff1e.bindPopup(popup_3a78b7239d50bee75f1c65ead051e4d9)
+        ;
+
+        
+    
+    
+            circle_marker_840b43c2850960c91da8c9e5bfd7ff1e.bindTooltip(
+                `<div>
+                     Jorapokhar: AQI 198 (Poor)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5e3358dc7b27997b73e22be3147996a6 = L.circleMarker(
+                [21.82, 83.92],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8f3f97", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_22b7b772f4b37d48672f4b99509f2550);
+        
+    
+        var popup_d7c5e7ebbf82884d219589caa330a745 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_9458bd82f3289dffe103c310a56234da = $(`<div id="html_9458bd82f3289dffe103c310a56234da" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; min-width:140px'>                 <b style='font-size:14px'>Brajrajnagar</b><br>                 <span style='color:#666'>Avg AQI:</span> <b style='color:#8f3f97'>210</b><br>                 <span style='color:#666'>Category:</span> <b>Very Poor</b>             </div></div>`)[0];
+                popup_d7c5e7ebbf82884d219589caa330a745.setContent(html_9458bd82f3289dffe103c310a56234da);
+            
+        
+
+        circle_marker_5e3358dc7b27997b73e22be3147996a6.bindPopup(popup_d7c5e7ebbf82884d219589caa330a745)
+        ;
+
+        
+    
+    
+            circle_marker_5e3358dc7b27997b73e22be3147996a6.bindTooltip(
+                `<div>
+                     Brajrajnagar: AQI 210 (Very Poor)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e6360670f012559a5d246afc9c1acd2d = L.circleMarker(
+                [23.0225, 72.5714],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff0000", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.2, "stroke": true, "weight": 1.5}
+            ).addTo(map_22b7b772f4b37d48672f4b99509f2550);
+        
+    
+        var popup_cce2c5a545c28d694498df0308586885 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_0353bd4f1e4048814138fd497d9f36fd = $(`<div id="html_0353bd4f1e4048814138fd497d9f36fd" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; min-width:140px'>                 <b style='font-size:14px'>Ahmedabad</b><br>                 <span style='color:#666'>Avg AQI:</span> <b style='color:#ff0000'>168</b><br>                 <span style='color:#666'>Category:</span> <b>Poor</b>             </div></div>`)[0];
+                popup_cce2c5a545c28d694498df0308586885.setContent(html_0353bd4f1e4048814138fd497d9f36fd);
+            
+        
+
+        circle_marker_e6360670f012559a5d246afc9c1acd2d.bindPopup(popup_cce2c5a545c28d694498df0308586885)
+        ;
+
+        
+    
+    
+            circle_marker_e6360670f012559a5d246afc9c1acd2d.bindTooltip(
+                `<div>
+                     Ahmedabad: AQI 168 (Poor)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_75371f02d927f5142ff52a3b711e6074 = L.circleMarker(
+                [26.9124, 75.7873],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff0000", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.666666666666666, "stroke": true, "weight": 1.5}
+            ).addTo(map_22b7b772f4b37d48672f4b99509f2550);
+        
+    
+        var popup_d9799c97a7ad9319b0199649ac26b450 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_456295c3726435f4952ee08d45f138d4 = $(`<div id="html_456295c3726435f4952ee08d45f138d4" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; min-width:140px'>                 <b style='font-size:14px'>Jaipur</b><br>                 <span style='color:#666'>Avg AQI:</span> <b style='color:#ff0000'>160</b><br>                 <span style='color:#666'>Category:</span> <b>Poor</b>             </div></div>`)[0];
+                popup_d9799c97a7ad9319b0199649ac26b450.setContent(html_456295c3726435f4952ee08d45f138d4);
+            
+        
+
+        circle_marker_75371f02d927f5142ff52a3b711e6074.bindPopup(popup_d9799c97a7ad9319b0199649ac26b450)
+        ;
+
+        
+    
+    
+            circle_marker_75371f02d927f5142ff52a3b711e6074.bindTooltip(
+                `<div>
+                     Jaipur: AQI 160 (Poor)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_960446f7b9bc0c1b69522b8175b74ef2 = L.circleMarker(
+                [31.634, 74.8723],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7e00", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_22b7b772f4b37d48672f4b99509f2550);
+        
+    
+        var popup_db0471ccf255dc374c1a752e580268ce = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_f1c950e054ef50377315cc792988d907 = $(`<div id="html_f1c950e054ef50377315cc792988d907" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; min-width:140px'>                 <b style='font-size:14px'>Amritsar</b><br>                 <span style='color:#666'>Avg AQI:</span> <b style='color:#ff7e00'>150</b><br>                 <span style='color:#666'>Category:</span> <b>Moderate</b>             </div></div>`)[0];
+                popup_db0471ccf255dc374c1a752e580268ce.setContent(html_f1c950e054ef50377315cc792988d907);
+            
+        
+
+        circle_marker_960446f7b9bc0c1b69522b8175b74ef2.bindPopup(popup_db0471ccf255dc374c1a752e580268ce)
+        ;
+
+        
+    
+    
+            circle_marker_960446f7b9bc0c1b69522b8175b74ef2.bindTooltip(
+                `<div>
+                     Amritsar: AQI 150 (Moderate)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0f1e295651c3faa535a0fe176e722913 = L.circleMarker(
+                [23.2599, 77.4126],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7e00", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1.5}
+            ).addTo(map_22b7b772f4b37d48672f4b99509f2550);
+        
+    
+        var popup_e1b1c2daead61f924e005b0ebb7ffce9 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_c5ec7ba856fa50fc8a366eae48265545 = $(`<div id="html_c5ec7ba856fa50fc8a366eae48265545" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; min-width:140px'>                 <b style='font-size:14px'>Bhopal</b><br>                 <span style='color:#666'>Avg AQI:</span> <b style='color:#ff7e00'>120</b><br>                 <span style='color:#666'>Category:</span> <b>Moderate</b>             </div></div>`)[0];
+                popup_e1b1c2daead61f924e005b0ebb7ffce9.setContent(html_c5ec7ba856fa50fc8a366eae48265545);
+            
+        
+
+        circle_marker_0f1e295651c3faa535a0fe176e722913.bindPopup(popup_e1b1c2daead61f924e005b0ebb7ffce9)
+        ;
+
+        
+    
+    
+            circle_marker_0f1e295651c3faa535a0fe176e722913.bindTooltip(
+                `<div>
+                     Bhopal: AQI 120 (Moderate)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d1e7e5603f6f6e7e0f1c71a2e8d60d7f = L.circleMarker(
+                [19.076, 72.8777],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7e00", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1.5}
+            ).addTo(map_22b7b772f4b37d48672f4b99509f2550);
+        
+    
+        var popup_d66efe5f69de5c9b83c352942a8579ed = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_2e8fd4362e7ddd304b3f82d056718aae = $(`<div id="html_2e8fd4362e7ddd304b3f82d056718aae" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; min-width:140px'>                 <b style='font-size:14px'>Mumbai</b><br>                 <span style='color:#666'>Avg AQI:</span> <b style='color:#ff7e00'>119</b><br>                 <span style='color:#666'>Category:</span> <b>Moderate</b>             </div></div>`)[0];
+                popup_d66efe5f69de5c9b83c352942a8579ed.setContent(html_2e8fd4362e7ddd304b3f82d056718aae);
+            
+        
+
+        circle_marker_d1e7e5603f6f6e7e0f1c71a2e8d60d7f.bindPopup(popup_d66efe5f69de5c9b83c352942a8579ed)
+        ;
+
+        
+    
+    
+            circle_marker_d1e7e5603f6f6e7e0f1c71a2e8d60d7f.bindTooltip(
+                `<div>
+                     Mumbai: AQI 119 (Moderate)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fc02eecb3732e7cbf7e5d63d953e70f4 = L.circleMarker(
+                [22.5726, 88.3639],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7e00", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_22b7b772f4b37d48672f4b99509f2550);
+        
+    
+        var popup_61e368b337f1c0deca1a2f3783e9b463 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_20ac08dd2cfe6400bf36bae63cc3bab6 = $(`<div id="html_20ac08dd2cfe6400bf36bae63cc3bab6" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; min-width:140px'>                 <b style='font-size:14px'>Kolkata</b><br>                 <span style='color:#666'>Avg AQI:</span> <b style='color:#ff7e00'>135</b><br>                 <span style='color:#666'>Category:</span> <b>Moderate</b>             </div></div>`)[0];
+                popup_61e368b337f1c0deca1a2f3783e9b463.setContent(html_20ac08dd2cfe6400bf36bae63cc3bab6);
+            
+        
+
+        circle_marker_fc02eecb3732e7cbf7e5d63d953e70f4.bindPopup(popup_61e368b337f1c0deca1a2f3783e9b463)
+        ;
+
+        
+    
+    
+            circle_marker_fc02eecb3732e7cbf7e5d63d953e70f4.bindTooltip(
+                `<div>
+                     Kolkata: AQI 135 (Moderate)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6e2c918348adb6d07a6ca51c87ae8375 = L.circleMarker(
+                [26.1445, 91.7362],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7e00", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.666666666666666, "stroke": true, "weight": 1.5}
+            ).addTo(map_22b7b772f4b37d48672f4b99509f2550);
+        
+    
+        var popup_8cc3cf0050e964e65f55d0473a1358cc = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_2d7d066e67ee345fad69b70f1a3c9972 = $(`<div id="html_2d7d066e67ee345fad69b70f1a3c9972" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; min-width:140px'>                 <b style='font-size:14px'>Guwahati</b><br>                 <span style='color:#666'>Avg AQI:</span> <b style='color:#ff7e00'>130</b><br>                 <span style='color:#666'>Category:</span> <b>Moderate</b>             </div></div>`)[0];
+                popup_8cc3cf0050e964e65f55d0473a1358cc.setContent(html_2d7d066e67ee345fad69b70f1a3c9972);
+            
+        
+
+        circle_marker_6e2c918348adb6d07a6ca51c87ae8375.bindPopup(popup_8cc3cf0050e964e65f55d0473a1358cc)
+        ;
+
+        
+    
+    
+            circle_marker_6e2c918348adb6d07a6ca51c87ae8375.bindTooltip(
+                `<div>
+                     Guwahati: AQI 130 (Moderate)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8eb13893a1eda87a194f3c7b4a4cf0cc = L.circleMarker(
+                [17.385, 78.4867],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7e00", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1.5}
+            ).addTo(map_22b7b772f4b37d48672f4b99509f2550);
+        
+    
+        var popup_59b4266a6b61d6e44491acebe6050c6a = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_adc7bb5698b7622652d056c17b3cd728 = $(`<div id="html_adc7bb5698b7622652d056c17b3cd728" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; min-width:140px'>                 <b style='font-size:14px'>Hyderabad</b><br>                 <span style='color:#666'>Avg AQI:</span> <b style='color:#ff7e00'>101</b><br>                 <span style='color:#666'>Category:</span> <b>Moderate</b>             </div></div>`)[0];
+                popup_59b4266a6b61d6e44491acebe6050c6a.setContent(html_adc7bb5698b7622652d056c17b3cd728);
+            
+        
+
+        circle_marker_8eb13893a1eda87a194f3c7b4a4cf0cc.bindPopup(popup_59b4266a6b61d6e44491acebe6050c6a)
+        ;
+
+        
+    
+    
+            circle_marker_8eb13893a1eda87a194f3c7b4a4cf0cc.bindTooltip(
+                `<div>
+                     Hyderabad: AQI 101 (Moderate)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cc7bd0db6b115d6d81cf652d87ba4f1a = L.circleMarker(
+                [12.9716, 77.5946],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffff00", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1.5}
+            ).addTo(map_22b7b772f4b37d48672f4b99509f2550);
+        
+    
+        var popup_aaad18e28819cd89cbe1a8d3c3fadb2c = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_f4b936cb7a9b67965133c1c3b0519b01 = $(`<div id="html_f4b936cb7a9b67965133c1c3b0519b01" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; min-width:140px'>                 <b style='font-size:14px'>Bengaluru</b><br>                 <span style='color:#666'>Avg AQI:</span> <b style='color:#ffff00'>97</b><br>                 <span style='color:#666'>Category:</span> <b>Satisfactory</b>             </div></div>`)[0];
+                popup_aaad18e28819cd89cbe1a8d3c3fadb2c.setContent(html_f4b936cb7a9b67965133c1c3b0519b01);
+            
+        
+
+        circle_marker_cc7bd0db6b115d6d81cf652d87ba4f1a.bindPopup(popup_aaad18e28819cd89cbe1a8d3c3fadb2c)
+        ;
+
+        
+    
+    
+            circle_marker_cc7bd0db6b115d6d81cf652d87ba4f1a.bindTooltip(
+                `<div>
+                     Bengaluru: AQI 97 (Satisfactory)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ae1efb216106b0608367ade585e35b2c = L.circleMarker(
+                [13.0827, 80.2707],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffff00", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1.5}
+            ).addTo(map_22b7b772f4b37d48672f4b99509f2550);
+        
+    
+        var popup_ab4c75e855794553dcdd691013872304 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_8ff5ac8b494132ab9397d56d6b6563e3 = $(`<div id="html_8ff5ac8b494132ab9397d56d6b6563e3" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; min-width:140px'>                 <b style='font-size:14px'>Chennai</b><br>                 <span style='color:#666'>Avg AQI:</span> <b style='color:#ffff00'>93</b><br>                 <span style='color:#666'>Category:</span> <b>Satisfactory</b>             </div></div>`)[0];
+                popup_ab4c75e855794553dcdd691013872304.setContent(html_8ff5ac8b494132ab9397d56d6b6563e3);
+            
+        
+
+        circle_marker_ae1efb216106b0608367ade585e35b2c.bindPopup(popup_ab4c75e855794553dcdd691013872304)
+        ;
+
+        
+    
+    
+            circle_marker_ae1efb216106b0608367ade585e35b2c.bindTooltip(
+                `<div>
+                     Chennai: AQI 93 (Satisfactory)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_165f589ce3181cb92078f60e7ed5a723 = L.circleMarker(
+                [17.6868, 83.2185],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffff00", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1.5}
+            ).addTo(map_22b7b772f4b37d48672f4b99509f2550);
+        
+    
+        var popup_3224bc93eaba3c7ec6bcfb6973975638 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_0de124b47e1b18b67a193ed04870289e = $(`<div id="html_0de124b47e1b18b67a193ed04870289e" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; min-width:140px'>                 <b style='font-size:14px'>Visakhapatnam</b><br>                 <span style='color:#666'>Avg AQI:</span> <b style='color:#ffff00'>88</b><br>                 <span style='color:#666'>Category:</span> <b>Satisfactory</b>             </div></div>`)[0];
+                popup_3224bc93eaba3c7ec6bcfb6973975638.setContent(html_0de124b47e1b18b67a193ed04870289e);
+            
+        
+
+        circle_marker_165f589ce3181cb92078f60e7ed5a723.bindPopup(popup_3224bc93eaba3c7ec6bcfb6973975638)
+        ;
+
+        
+    
+    
+            circle_marker_165f589ce3181cb92078f60e7ed5a723.bindTooltip(
+                `<div>
+                     Visakhapatnam: AQI 88 (Satisfactory)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f80deee37cb4d1fdf5fd3b9cb6c05670 = L.circleMarker(
+                [9.9312, 76.2673],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffff00", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1.5}
+            ).addTo(map_22b7b772f4b37d48672f4b99509f2550);
+        
+    
+        var popup_640d4a8598f7eeb7d20f9820f5211640 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_269b49d47208eba60e6f1adcd64294e9 = $(`<div id="html_269b49d47208eba60e6f1adcd64294e9" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; min-width:140px'>                 <b style='font-size:14px'>Kochi</b><br>                 <span style='color:#666'>Avg AQI:</span> <b style='color:#ffff00'>60</b><br>                 <span style='color:#666'>Category:</span> <b>Satisfactory</b>             </div></div>`)[0];
+                popup_640d4a8598f7eeb7d20f9820f5211640.setContent(html_269b49d47208eba60e6f1adcd64294e9);
+            
+        
+
+        circle_marker_f80deee37cb4d1fdf5fd3b9cb6c05670.bindPopup(popup_640d4a8598f7eeb7d20f9820f5211640)
+        ;
+
+        
+    
+    
+            circle_marker_f80deee37cb4d1fdf5fd3b9cb6c05670.bindTooltip(
+                `<div>
+                     Kochi: AQI 60 (Satisfactory)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_147c75dd9544158f2ecb0eeae117bba8 = L.circleMarker(
+                [9.9816, 76.2999],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffff00", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1.5}
+            ).addTo(map_22b7b772f4b37d48672f4b99509f2550);
+        
+    
+        var popup_b4cb0cc76c0124cef024c4c79046ecb4 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_223b1813f9a269c592b89f574f36c2b8 = $(`<div id="html_223b1813f9a269c592b89f574f36c2b8" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; min-width:140px'>                 <b style='font-size:14px'>Ernakulam</b><br>                 <span style='color:#666'>Avg AQI:</span> <b style='color:#ffff00'>58</b><br>                 <span style='color:#666'>Category:</span> <b>Satisfactory</b>             </div></div>`)[0];
+                popup_b4cb0cc76c0124cef024c4c79046ecb4.setContent(html_223b1813f9a269c592b89f574f36c2b8);
+            
+        
+
+        circle_marker_147c75dd9544158f2ecb0eeae117bba8.bindPopup(popup_b4cb0cc76c0124cef024c4c79046ecb4)
+        ;
+
+        
+    
+    
+            circle_marker_147c75dd9544158f2ecb0eeae117bba8.bindTooltip(
+                `<div>
+                     Ernakulam: AQI 58 (Satisfactory)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ea4bdfeec062fc2e8771e1ee18cd852c = L.circleMarker(
+                [8.5241, 76.9366],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffff00", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1.5}
+            ).addTo(map_22b7b772f4b37d48672f4b99509f2550);
+        
+    
+        var popup_6fbcb685459ab8c758aa6400089975e2 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_751cddde9f4de8510eaca940734cdeb7 = $(`<div id="html_751cddde9f4de8510eaca940734cdeb7" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; min-width:140px'>                 <b style='font-size:14px'>Thiruvananthapuram</b><br>                 <span style='color:#666'>Avg AQI:</span> <b style='color:#ffff00'>58</b><br>                 <span style='color:#666'>Category:</span> <b>Satisfactory</b>             </div></div>`)[0];
+                popup_6fbcb685459ab8c758aa6400089975e2.setContent(html_751cddde9f4de8510eaca940734cdeb7);
+            
+        
+
+        circle_marker_ea4bdfeec062fc2e8771e1ee18cd852c.bindPopup(popup_6fbcb685459ab8c758aa6400089975e2)
+        ;
+
+        
+    
+    
+            circle_marker_ea4bdfeec062fc2e8771e1ee18cd852c.bindTooltip(
+                `<div>
+                     Thiruvananthapuram: AQI 58 (Satisfactory)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a6ddbf3edefb0057c560aa7204e3121c = L.circleMarker(
+                [11.0168, 76.9558],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffff00", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1.5}
+            ).addTo(map_22b7b772f4b37d48672f4b99509f2550);
+        
+    
+        var popup_eab5002b49f63883eb0421a6eb3bbd58 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_78d65b4044c5ffec780021cfac3392bf = $(`<div id="html_78d65b4044c5ffec780021cfac3392bf" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; min-width:140px'>                 <b style='font-size:14px'>Coimbatore</b><br>                 <span style='color:#666'>Avg AQI:</span> <b style='color:#ffff00'>52</b><br>                 <span style='color:#666'>Category:</span> <b>Satisfactory</b>             </div></div>`)[0];
+                popup_eab5002b49f63883eb0421a6eb3bbd58.setContent(html_78d65b4044c5ffec780021cfac3392bf);
+            
+        
+
+        circle_marker_a6ddbf3edefb0057c560aa7204e3121c.bindPopup(popup_eab5002b49f63883eb0421a6eb3bbd58)
+        ;
+
+        
+    
+    
+            circle_marker_a6ddbf3edefb0057c560aa7204e3121c.bindTooltip(
+                `<div>
+                     Coimbatore: AQI 52 (Satisfactory)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f4ca51c36c60d34b4b2beeeee18b6dd4 = L.circleMarker(
+                [25.5788, 91.8933],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00e400", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1.5}
+            ).addTo(map_22b7b772f4b37d48672f4b99509f2550);
+        
+    
+        var popup_b95fa8d9e80a8a8df205a319ba292862 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_344da26af420c32a3cd4af3387f43816 = $(`<div id="html_344da26af420c32a3cd4af3387f43816" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; min-width:140px'>                 <b style='font-size:14px'>Shillong</b><br>                 <span style='color:#666'>Avg AQI:</span> <b style='color:#00e400'>41</b><br>                 <span style='color:#666'>Category:</span> <b>Good</b>             </div></div>`)[0];
+                popup_b95fa8d9e80a8a8df205a319ba292862.setContent(html_344da26af420c32a3cd4af3387f43816);
+            
+        
+
+        circle_marker_f4ca51c36c60d34b4b2beeeee18b6dd4.bindPopup(popup_b95fa8d9e80a8a8df205a319ba292862)
+        ;
+
+        
+    
+    
+            circle_marker_f4ca51c36c60d34b4b2beeeee18b6dd4.bindTooltip(
+                `<div>
+                     Shillong: AQI 41 (Good)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b7fe5573e5053fb2f569527966e983a8 = L.circleMarker(
+                [23.7271, 92.7176],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00e400", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1.5}
+            ).addTo(map_22b7b772f4b37d48672f4b99509f2550);
+        
+    
+        var popup_a55deb6702d74e31c2fb4af97d6d3f99 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_c49b73e0b405a8226e7d2832d00d014b = $(`<div id="html_c49b73e0b405a8226e7d2832d00d014b" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; min-width:140px'>                 <b style='font-size:14px'>Aizawl</b><br>                 <span style='color:#666'>Avg AQI:</span> <b style='color:#00e400'>37</b><br>                 <span style='color:#666'>Category:</span> <b>Good</b>             </div></div>`)[0];
+                popup_a55deb6702d74e31c2fb4af97d6d3f99.setContent(html_c49b73e0b405a8226e7d2832d00d014b);
+            
+        
+
+        circle_marker_b7fe5573e5053fb2f569527966e983a8.bindPopup(popup_a55deb6702d74e31c2fb4af97d6d3f99)
+        ;
+
+        
+    
+    
+            circle_marker_b7fe5573e5053fb2f569527966e983a8.bindTooltip(
+                `<div>
+                     Aizawl: AQI 37 (Good)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6105815a7325416c739036610913f823 = L.circleMarker(
+                [16.5131, 80.5158],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffff00", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1.5}
+            ).addTo(map_22b7b772f4b37d48672f4b99509f2550);
+        
+    
+        var popup_ec778f0d44c38396288c9811426ae034 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_3c058dcacecc438caf07984d6792ffc9 = $(`<div id="html_3c058dcacecc438caf07984d6792ffc9" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; min-width:140px'>                 <b style='font-size:14px'>Amaravati</b><br>                 <span style='color:#666'>Avg AQI:</span> <b style='color:#ffff00'>54</b><br>                 <span style='color:#666'>Category:</span> <b>Satisfactory</b>             </div></div>`)[0];
+                popup_ec778f0d44c38396288c9811426ae034.setContent(html_3c058dcacecc438caf07984d6792ffc9);
+            
+        
+
+        circle_marker_6105815a7325416c739036610913f823.bindPopup(popup_ec778f0d44c38396288c9811426ae034)
+        ;
+
+        
+    
+    
+            circle_marker_6105815a7325416c739036610913f823.bindTooltip(
+                `<div>
+                     Amaravati: AQI 54 (Satisfactory)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5f905efa8f601f5127c89ff7645c4ca7 = L.circleMarker(
+                [20.9374, 77.7796],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffff00", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1.5}
+            ).addTo(map_22b7b772f4b37d48672f4b99509f2550);
+        
+    
+        var popup_9ff6bfcee5a536881b4e2af1eea60777 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_85542a022a361f5df20b82e2edae58e2 = $(`<div id="html_85542a022a361f5df20b82e2edae58e2" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; min-width:140px'>                 <b style='font-size:14px'>Amaravati(MH)</b><br>                 <span style='color:#666'>Avg AQI:</span> <b style='color:#ffff00'>54</b><br>                 <span style='color:#666'>Category:</span> <b>Satisfactory</b>             </div></div>`)[0];
+                popup_9ff6bfcee5a536881b4e2af1eea60777.setContent(html_85542a022a361f5df20b82e2edae58e2);
+            
+        
+
+        circle_marker_5f905efa8f601f5127c89ff7645c4ca7.bindPopup(popup_9ff6bfcee5a536881b4e2af1eea60777)
+        ;
+
+        
+    
+    
+            circle_marker_5f905efa8f601f5127c89ff7645c4ca7.bindTooltip(
+                `<div>
+                     Amaravati(MH): AQI 54 (Satisfactory)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>
