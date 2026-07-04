@@ -32,6 +32,23 @@ from 2015 to 2020 using Python and data analytics techniques.
 5. Pollutant Correlation Heatmap
 6. Delhi AQI Forecast (Next 1 Year)
 
+## 📊 Visualizations
+
+### Top 10 Most Polluted Cities
+![Top Cities](chart1_top10_cities.png)
+
+### Yearly AQI Trend
+![Yearly Trend](chart2_yearly_trend.png)
+
+### COVID Lockdown Impact
+![COVID Impact](chart3_covid_impact.png)
+
+### Pollutant Correlation Heatmap
+![Heatmap](chart4_heatmap.png)
+
+### Delhi AQI Forecast
+![Forecast](chart5_delhi_forecast.png)
+
 ## 👨‍💻 Author
 **Pratik Ranjan**  
 B.Tech ECE | IIIT Nagpur  
